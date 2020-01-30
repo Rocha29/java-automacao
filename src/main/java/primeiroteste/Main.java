@@ -15,6 +15,77 @@ public class Main
 {
 	static WebDriver driver;
 	
+	public static void main(String[] args)
+	{
+		Page pg = new Page();
+		
+		
+		
+		//Driver
+		System.setProperty("webdriver.chrome.driver", "C:\\Dev\\AutomationDependencies\\Drivers\\chromedriver.exe");
+		driver = new ChromeDriver();
+		driver.get("https://automacaocombatista.herokuapp.com/");
+		
+		// Entrando na pagina
+		click(pg.botao1);
+ 				 		
+ 		//Cadastro de usuarios
+		click(pg.formulario);
+ 		
+ 		sleep(500);
+ 		click(pg.usuario);
+ 		print("01 - Antes de preencher");
+ 		send(pg.name, "Robson");
+ 		send(pg.lastname, "Rocha");
+ 		send(pg.email, "rocha@gmail.com");
+ 		send(pg.endereco, "Rua Tres dois um");
+ 		send(pg.universidade, "Aquela mesmo");	
+ 		send(pg.profissao, "QA");
+ 		send(pg.genero, "M");
+ 		send(pg.idade, "31");
+ 		print("02 - Depois de preencher");
+ 		click(pg.criar);
+ 		
+ 		// validar cadastro
+ 		try
+ 		{
+	 		click(pg.validacao);
+	 		System.out.println("Cadastro Realizado");
+	 		print("03 - Cadastro realizado");
+ 		}
+ 		catch (NoSuchElementException e)
+ 		{
+ 			System.out.println("Cadastro não realizado");
+ 		}
+ 		 		
+ 		// Mapeando botoes
+ 		click(pg.btnbuscadeelementos);
+ 		sleep(300);
+ 		click(pg.btnbotoes);
+ 		click(pg.btnRaised);
+ 		click(pg.btnFloating);
+ 		click(pg.btnFlat);
+ 		click(pg.btnSubmit);
+ 		
+ 		//Localizando elemento
+ 		By by = By.xpath(pg.btnDisable);
+ 		WebElement element = driver.findElement(by);
+ 		
+ 		//Verificando se está ativo
+ 		if (hasClass(element, "disabled"))
+ 		{
+ 			System.out.println("Botão estava desativado.");
+ 		}
+ 		else
+ 		{
+ 			click(pg.btnDisable);
+ 		}
+ 		
+ 		
+ 		
+ 		
+	}
+	
 	static void sleep(int ms)
 	{
 		try
@@ -53,75 +124,17 @@ public class Main
 		}
 	}
 	
-	public static void main(String[] args)
+	static boolean hasClass(WebElement element, String s)
 	{
-		page pg = new page();
-		
-		
-		
-		//Driver
-		System.setProperty("webdriver.chrome.driver", "C:\\Dev\\AutomationDependencies\\Drivers\\chromedriver.exe");
-		driver = new ChromeDriver();
-		driver.get("https://automacaocombatista.herokuapp.com/");
-		
-		//Botao 1
-		click(pg.botao1);
- 				 		
- 		//formulario
-		click(pg.formulario);
- 		
-		//Espera
- 		sleep(500);
- 		
- 		//Criar Usuários
- 		click(pg.usuario);
- 		
- 		print("01 - Antes de preencher");
- 		 		 		
- 		// Campo nome
- 		send(pg.name, "Robson");
- 		
- 		// Campo sobrenome
- 		send(pg.lastname, "Rocha");
- 		
- 		// Campo e-mail
- 		send(pg.email, "rocha@gmail.com");
- 		
-    	// Campo endereço
- 		send(pg.endereco, "Rua Tres dois um");
- 	    
- 		// Campo universidade
- 		send(pg.universidade, "Aquela mesmo");	
- 	 		
- 	 	// Campo profissao
- 		send(pg.profissao, "QA");
- 		
- 		// Campo Genero
- 		send(pg.genero, "M");
- 		
- 		// Campo idade
- 		send(pg.idade, "31");
- 		
- 		print("02 - Depois de preencher");
- 		
- 		// clique no botao criar
- 		click(pg.criar);
- 		
- 	 		
- 		// validar cadastro
- 		try
- 		{
-	 		click(pg.validacao);
-	 		System.out.println("Cadastro Realizado");
-	 		print("03 - Cadastro realizado");
- 		}
- 		catch (NoSuchElementException e)
- 		{
- 			System.out.println("Cadastro não realizado");
- 		}
- 			//driver.close();
- 		
- 		
- 		
+	    String classes = element.getAttribute("class");
+	    for (String c : classes.split(" "))
+	    {
+	        if (c.equals(s))
+	        {
+	            return true;
+	        }
+	    }
+
+	    return false;
 	}
 }
