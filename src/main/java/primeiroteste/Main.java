@@ -27,14 +27,16 @@ public class Main
 		driver.get("https://automacaocombatista.herokuapp.com/");
 		
 		// Entrando na pagina
+		Log.mensagem("Entrando na página");
 		click(pg.botao1);
  				 		
  		//Cadastro de usuarios
+		Log.mensagem("Cadastrando usuário");
 		click(pg.formulario);
  		
  		sleep(500);
  		click(pg.usuario);
- 		print("01 - Antes de preencher");
+ 		tirarPrint("01 - Antes de preencher");
  		send(pg.name, "Robson");
  		send(pg.lastname, "Rocha");
  		send(pg.email, "rocha@gmail.com");
@@ -43,22 +45,24 @@ public class Main
  		send(pg.profissao, "QA");
  		send(pg.genero, "M");
  		send(pg.idade, "31");
- 		print("02 - Depois de preencher");
+ 		tirarPrint("02 - Depois de preencher");
  		click(pg.criar);
  		
  		// validar cadastro
+ 		Log.mensagem("Validando cadastro realizado");
  		try
  		{
 	 		click(pg.validacao);
-	 		System.out.println("Cadastro Realizado");
-	 		print("03 - Cadastro realizado");
+	 		Log.mensagem("Cadastro Realizado");
+	 		tirarPrint("03 - Cadastro realizado");
  		}
  		catch (NoSuchElementException e)
  		{
- 			System.out.println("Cadastro não realizado");
+ 			Log.mensagem("Cadastro não realizado");
  		}
  		 		
  		// Mapeando botoes
+ 		Log.mensagem("Testando boões");
  		click(pg.btnbuscadeelementos);
  		sleep(300);
  		click(pg.btnbotoes);
@@ -74,7 +78,7 @@ public class Main
  		//Verificando se está ativo
  		if (hasClass(element, "disabled"))
  		{
- 			System.out.println("Botão estava desativado.");
+ 			Log.mensagem("Botão estava desativado.");
  		}
  		else
  		{
@@ -83,7 +87,7 @@ public class Main
  		
  		
  		
- 		
+ 		Log.mensagem("Finalizando teste.");
 	}
 	
 	static void sleep(int ms)
@@ -109,7 +113,7 @@ public class Main
 		element.sendKeys(t);
 	}
 	
-	static void print (String nomeDoArquivo) 
+	static void tirarPrint (String nomeDoArquivo) 
 	{
 		try
 		{
