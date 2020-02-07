@@ -22,16 +22,17 @@ public class Main
 		
 		
 		//Driver
-		System.setProperty("webdriver.chrome.driver", "C:\\Dev\\AutomationDependencies\\Drivers\\chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", "C:\\Dev\\drivers\\chromedriver.exe");
 		driver = new ChromeDriver();
+		driver.manage().window().maximize();
 		driver.get("https://automacaocombatista.herokuapp.com/");
 		
 		// Entrando na pagina
-		Log.mensagem("Entrando na p√°gina");
+		Log.mensagem("Entrando na p·gina");
 		click(pg.botao1);
  				 		
  		//Cadastro de usuarios
-		Log.mensagem("Cadastrando usu√°rio");
+		Log.mensagem("Cadastrando usu·rio");
 		click(pg.formulario);
  		
  		sleep(500);
@@ -58,11 +59,11 @@ public class Main
  		}
  		catch (NoSuchElementException e)
  		{
- 			Log.mensagem("Cadastro n√£o realizado");
+ 			Log.mensagem("Cadastro n„o realizado");
  		}
  		 		
  		// Mapeando botoes
- 		Log.mensagem("Testando bo√µes");
+ 		Log.mensagem("Testando boıes");
  		click(pg.btnbuscadeelementos);
  		sleep(300);
  		click(pg.btnbotoes);
@@ -75,15 +76,30 @@ public class Main
  		By by = By.xpath(pg.btnDisable);
  		WebElement element = driver.findElement(by);
  		
- 		//Verificando se est√° ativo
+ 		//Verificando se est· ativo
  		if (hasClass(element, "disabled"))
  		{
- 			Log.mensagem("Bot√£o estava desativado.");
+ 			Log.mensagem("Bot„o estava desativado.");
  		}
  		else
  		{
  			click(pg.btnDisable);
  		}
+ 		
+ 		// Radio e Checkbox
+ 		
+ 		click(pg.btnradiocheckbox);
+ 		sleep(1000);
+ 		click(pg.btnred);
+ 		click(pg.btnblue);
+ 		click(pg.btnyellow);
+ 		click(pg.btngreen);
+ 		click(pg.btnpurple);
+ 		click(pg.btngrey);
+ 		click(pg.btnblack);
+ 		click(pg.btnwhite);
+ 		click(pg.btnvoltar);
+ 		
  		
  		
  		
